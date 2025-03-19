@@ -4,7 +4,7 @@ This repository has a basic template to get started with Docker and DBT (data bu
 ## How to start
 
 1. Make sure that you have docker installed and running;
-1. Start the services with `docker compose up . --build`;
+1. Start the services with `docker compose up --build`;
 1. Attach to the container running dbt with `docker attach data-warehouse-course-app-1`
 
 You are now ready to start using DBT. You should be in the container's shell, where you can run `dbt` commands.
