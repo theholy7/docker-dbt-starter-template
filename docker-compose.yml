@@ -1,0 +1,31 @@
+version: "3"
+services:
+  # Container running our dbt project
+  app:
+    build: .
+    # Our current directory mounted to /dbt
+    # Changes made in our IDE are reflected in the container
+    volumes:
+      - .:/dbt
+    # Ensure that our docs website can be visited from the host machine
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    # Arguments to let us work within the dbt container
+    tty: true
+    stdin_open: true
+  # Supporting postgres container
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
